@@ -1,0 +1,7 @@
+com\mycompany\services\ClientService.class
+com\mycompany\clase4\RestAPP.class
+com\mycompany\clase4\ClientResource.class
+com\mycompany\model\Client.class
+com\mycompany\resources\RestAPP.class
+com\mycompany\resources\ClientResource.class
+com\mycompany\repository\ClientRepository.class
