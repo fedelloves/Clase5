@@ -11,16 +11,26 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ClientRepository {
+    
+    static {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (Exception ex) {
+            Logger.getLogger(ClientRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public static void main(String[] args) {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-
+            
+          
             insert();
-            select();
             update();
             delete();
         } catch (Exception e) {
@@ -28,14 +38,14 @@ public class ClientRepository {
             e.printStackTrace();
         }
     }
-    
-    public List<Client> getClients() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
-    private static void select() throws SQLException {
+    public List<Client> getClients() {
+        
+        List<Client> clients = new ArrayList<>();
+
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/servicio", "root", "")) {
-            String sql = "SELECT * FROM alumnos";
+            
+            String sql = "SELECT * FROM client";
 
             // Utilizamos un Statement para ejecutar nuestra consulta
             Statement statement = connection.createStatement();
@@ -43,14 +53,28 @@ public class ClientRepository {
             try (ResultSet rs = statement.executeQuery(sql)) {
                 while (rs.next()) {
                     // Podemos acceder por nombre o por índice, empezando desde 1
-                    String name = rs.getString("nombre");
-                    double average = rs.getDouble("promedio");
+                    int id = rs.getInt("id");
+                    String name = rs.getString("name");
+                    String lastName = rs.getString("lastName");
+                    int age = rs.getInt("age");
+                    
+                    Client c = new Client();
+                    
+                    c.setId(id);
+                    c.setName(name);
+                    c.setLastName(lastName);
+                    c.setAge(age);
+                    
+                    clients.add(c);
 
-                    System.out.println("Name: " + name);
-                    System.out.println("Average: " + average);
                 }
             }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return clients;
     }
 
     private static void insert() throws SQLException {
@@ -112,5 +136,4 @@ public class ClientRepository {
         return maxId;
     }
 
-    
 }

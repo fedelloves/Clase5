@@ -2,6 +2,8 @@ package com.mycompany.model;
 
 public class Client {
     
+    private int id;
+    
     private String name;
     
     private String lastName;
@@ -30,5 +32,9 @@ public class Client {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
