@@ -11,5 +11,9 @@ public class ClientService {
     public List<Client> getClients() {
         return repository.getClients();
     }
+
+    public Client getClient() {
+        return repository.getClient();
+    }
     
 }

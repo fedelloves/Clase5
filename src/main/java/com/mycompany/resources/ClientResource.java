@@ -29,7 +29,7 @@ public class ClientResource {
     public Client getClient(@PathParam("id") int id, @HeaderParam("X-Custom") int header ){
         System.out.println("ID: " + id);
         System.out.println("Header: " + header);
-        return null;
+        return service.getClient();
     }
 
 }

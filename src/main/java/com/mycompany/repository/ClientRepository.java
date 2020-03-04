@@ -38,6 +38,10 @@ public class ClientRepository {
             e.printStackTrace();
         }
     }
+    
+    public Client getClient() {
+        return null; //Agregar el codigo para consultar un solo cliente
+    }
 
     public List<Client> getClients() {
         
@@ -135,5 +139,7 @@ public class ClientRepository {
         }
         return maxId;
     }
+
+    
 
 }
